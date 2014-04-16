@@ -20,7 +20,6 @@ class ApplicationController < ActionController::Base
 	# via parameters. However, anyone could use Rails's token
 	# authentication features to get the token from a header.
 	def authenticate_user_from_token!
-		p "sssssssssssssssssssssssssssssssssssssssss"
 		user_token = params[:auth_token].presence
 		user = user_token && User.find_by_authentication_token(user_token.to_s)
 		 

@@ -5,7 +5,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   respond_to :json
 
 	def create
-    build_resource(user_params)
+    # build_resource(user_params)
+    build_resource(sign_up_params)
     # resource.skip_confirmation!
     if resource.save
       sign_in resource
