@@ -5,14 +5,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   respond_to :json
 
 	def create
-    # build_resource(user_params)
     build_resource(sign_up_params)
     # resource.skip_confirmation!
     if resource.save
-      sign_in resource
+      # sign_in resource
       render :status => 200,
            :json => { :success => true,
-                      :info => "Registered",
+                      :info => "Registered, Please confirm for login.",
                       :data => { :user => resource,
                                  :auth_token => current_user.authentication_token } }
     else
@@ -24,9 +23,5 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   private
-
-  def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation)
-  end
 
 end

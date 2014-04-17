@@ -125,6 +125,7 @@ GEM
     net-ssh (2.8.0)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
+    oj (2.7.3)
     orm_adapter (0.5.0)
     polyglot (0.3.4)
     pry (0.9.12.6)
@@ -138,6 +139,9 @@ GEM
       pry
     quiet_assets (1.0.2)
       railties (>= 3.1, < 5.0)
+    rabl-rails (0.3.4)
+      activesupport (>= 3.1)
+      railties (>= 3.1)
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -237,9 +241,11 @@ DEPENDENCIES
   jquery-rails
   launchy
   mysql2
+  oj
   pry-rails
   pry-rescue
   quiet_assets
+  rabl-rails
   rails (= 4.0.2)
   rails_layout
   rolify

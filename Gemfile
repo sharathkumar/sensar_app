@@ -47,6 +47,9 @@ gem 'mysql2'
 gem 'rolify'
 gem 'therubyracer', :platform=>:ruby
 
+gem 'rabl-rails'
+gem 'oj'
+
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_19, :mri_20, :mri_21, :rbx]
