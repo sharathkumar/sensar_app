@@ -1,11 +1,11 @@
+#sign_up
+curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d ' {"user":{"email":<email>","password":"<passwd>", "password_confirmation":"<passwd>"}}'  http://localhost:3000/users.json
+
+#Account confirmation
+curl -v -H "Accept: application/json" -H "Content-type: application/json" -X GET http://localhost:3000/users/confirmation.json?confirmation_token=<token>
+
 #login
 curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d ' {"user":{"email":"<email>","password":"<passwd>"}}'  http://localhost:3000/users/sign_in.json
  
- 
 #logout
 curl -v -H "Accept: application/json" -H "Content-type: application/json" -X DELETE http://localhost:3000/users/sign_out.json?auth_token=<token>
-
-#sign_up
-curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d ' {"user":{"email":"sarath4ever4u@gmail.com","password":"password", "password_confirmation":"password"}}'  http://localhost:3000/users.json
-
-

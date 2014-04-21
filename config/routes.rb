@@ -1,5 +1,5 @@
 SensarApp::Application.routes.draw do
-  devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions' }
+  devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions', confirmations: 'users/confirmations' }
   root to: "home#index"
   resources :home
   # The priority is based upon order of creation: first created -> highest priority.

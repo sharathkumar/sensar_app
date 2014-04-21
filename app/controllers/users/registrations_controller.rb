@@ -13,7 +13,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
            :json => { :success => true,
                       :info => "Registered, Please confirm for login.",
                       :data => { :user => resource,
-                                 :auth_token => current_user.authentication_token } }
+                                 :auth_token => resource.authentication_token } }
     else
       render :status => :unprocessable_entity,
              :json => { :success => false,
@@ -21,7 +21,5 @@ class Users::RegistrationsController < Devise::RegistrationsController
                         :data => {} }
     end
   end
-
-  private
 
 end
