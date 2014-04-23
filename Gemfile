@@ -48,7 +48,7 @@ gem 'rolify'
 gem 'therubyracer', :platform=>:ruby
 
 gem 'rabl-rails'
-gem 'oj'
+gem 'yajl-ruby', require: 'yajl'
 
 group :development do
   gem 'better_errors'
