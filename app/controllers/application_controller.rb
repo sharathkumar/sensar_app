@@ -9,8 +9,7 @@ class ApplicationController < ActionController::Base
 
   def after_token_authentication
     if params[:authentication_key].present?
-      @user = User.find_by_authentication_token(params[:authentication_key]) # we are finding 
-      the user with the authentication_key with which devise has authenticated the user
+      @user = User.find_by_authentication_token(params[:authentication_key]) # we are finding the user with the authentication_key with which devise has authenticated the user
       sign_in @user if @user # we are siging in user if it exist. sign_in is devise method to sigin in any user
       redirect_to root_path # now we are redirecting the user to root_path i,e our home page
     end

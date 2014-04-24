@@ -1,8 +1,8 @@
 class BeaconsController < ApplicationController
 	layout 'success'
-	respond_to :json
+	
 	def show
-		@users = User.all
+		@beacon = Beacon.find(params[:id])
 	end
 
 end

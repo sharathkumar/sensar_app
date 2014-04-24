@@ -1,2 +1,3 @@
-collection :@users
-attributes :id, :email
+object :@beacon
+attributes :uuid, :text
+attributes :major, :minor, :image, :url 
