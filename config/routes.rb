@@ -1,5 +1,8 @@
 SensarApp::Application.routes.draw do
-  devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions', confirmations: 'users/confirmations' }
+  devise_for :users, controllers: { registrations: 'users/registrations', 
+                                    sessions: 'users/sessions', 
+                                    confirmations: 'users/confirmations',
+                                    passwords: 'users/passwords' }
   root to: "home#index"
   resources :home
   resources :beacons

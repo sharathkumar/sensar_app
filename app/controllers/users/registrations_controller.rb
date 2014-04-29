@@ -1,6 +1,7 @@
 class Users::RegistrationsController < Devise::RegistrationsController
 	skip_before_filter :verify_authenticity_token,
                      :if => Proc.new { |c| c.request.format == 'application/json' }
+  before_filter :configure_permitted_parameters, if: :devise_controller?
 
   respond_to :json
 
@@ -21,5 +22,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
                         :data => {} }
     end
   end
+
+  protected
+
+  def configure_permitted_parameters
+   devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:first_name, :last_name, :email, :password, :password_confirmation, :date_of_birth) }
+  end
+
+  
 
 end

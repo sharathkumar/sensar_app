@@ -42,7 +42,7 @@ gem 'jbuilder', '~> 1.2'
 # gem 'debugger', group: [:development, :test]
 
 gem 'cancan'
-gem 'devise'
+gem 'devise', '~> 3.2.4'
 gem 'mysql2'
 gem 'rolify'
 gem 'therubyracer', :platform=>:ruby
