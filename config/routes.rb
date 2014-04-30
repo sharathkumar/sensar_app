@@ -1,4 +1,31 @@
 SensarApp::Application.routes.draw do
+
+  # constraints subdomain: 'api' do
+  #  scope module: 'api' do
+  #    namespace :v1 do
+  #      devise_for :users, controllers: { registrations: 'api/v1/users/registrations', 
+  #                                  sessions: 'api/v1/users/sessions', 
+  #                                  confirmations: 'users/confirmations',
+  #                                  passwords: 'users/passwords' }
+  #      resources :home
+  #      resources :beacons
+  #    end
+  #  end
+  # end
+
+  namespace :api, defaults: {format: :json} do
+    scope module: :v1, constraints: ApiConstraints.new(version: 1, default: :true) do
+      devise_scope :user do
+        match '/sign_in' => 'users/sessions#create', :via => :post
+        match '/sign_out' => 'users/sessions#destroy', :via => :delete
+        match '/sign_up' => 'users/registrations#create', :via => :post
+        match '/forgot_password' => 'users/passwords#create', :via => :post
+        match '/reset_password' => 'users/passwords#update', :via => :post
+      end
+    end
+  end
+
+
   devise_for :users, controllers: { registrations: 'users/registrations', 
                                     sessions: 'users/sessions', 
                                     confirmations: 'users/confirmations',

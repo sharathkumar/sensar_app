@@ -207,7 +207,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   cucumber-rails
   database_cleaner (= 1.0.1)
-  devise
+  devise (~> 3.2.4)
   email_spec
   factory_girl_rails
   hub
