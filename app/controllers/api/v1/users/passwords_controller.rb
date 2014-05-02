@@ -18,7 +18,7 @@ class Api::V1::Users::PasswordsController < Devise::PasswordsController
 
 	 # PUT /resource/password
   def update
-    self.resource = resource_class.reset_password_by_token(resource_params)
+		self.resource = resource_class.reset_password_by_token(resource_params)
     if resource.errors.empty?
       resource.unlock_access! if unlockable?(resource)
       render :status => 200,
