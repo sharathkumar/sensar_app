@@ -9,15 +9,15 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
     yield resource if block_given?
 
     if resource.errors.empty?
-    	render :status => 200,
-       :json => { :success => true,
-                  :info => "Your account was successfully confirmed., Please login.",
-                  :data => {} }
+    	render status: 200,
+             json: {  success: true,
+                      info: "Your account was successfully confirmed., Please login.",
+                      data: {} }
     else
-    	render :status => :unprocessable_entity,
-       :json => { :success => false,
-                  :info => resource.errors,
-                  :data => {} }
+    	render status: 401,
+             json: {  success: false,
+                      info: resource.errors,
+                      data: {} }
     end
   end
   

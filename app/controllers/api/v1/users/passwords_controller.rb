@@ -4,15 +4,15 @@ class Api::V1::Users::PasswordsController < Devise::PasswordsController
   def create
     self.resource = resource_class.send_reset_password_instructions(resource_params)
     if successfully_sent?(resource)
-      render :status => 200,
-       	:json => { 	:success => true,
-                  	:info => "You will receive an email with instructions on how to reset your password in a few minutes.",
-                  	:data => {} }
+      render  status: 200,
+       	      json: { success: true,
+                  	  info: "You will receive an email with instructions on how to reset your password in a few minutes.",
+                  	  data: {} }
     else
-      render :status => :unprocessable_entity,
-       	:json => { 	:success => false,
-                  	:info => resource.errors,
-                  	:data => {} }
+      render  status: 401,
+       	      json: { success: false,
+                  	  info: resource.errors,
+                  	  data: {} }
     end
   end
 
@@ -21,15 +21,15 @@ class Api::V1::Users::PasswordsController < Devise::PasswordsController
 		self.resource = resource_class.reset_password_by_token(resource_params)
     if resource.errors.empty?
       resource.unlock_access! if unlockable?(resource)
-      render :status => 200,
-       	:json => { :success => true,
-                  :info => "Your password was changed successfully.",
-                  :data => {} }
+      render  status: 200,
+       	      json: { success: true,
+                      info: "Your password was changed successfully.",
+                      data: {} }
     else
-      render :status => :unprocessable_entity,
-       	:json => { :success => false,
-                  :info => resource.errors,
-                  :data => {} }
+      render  status: 401,
+       	      json: { success: false,
+                      info: resource.errors,
+                      data: {} }
     end
   end
 
