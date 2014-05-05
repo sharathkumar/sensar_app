@@ -1,0 +1,1 @@
+CMS_HOST = 'http://www.json-generator.com'

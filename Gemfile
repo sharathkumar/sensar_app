@@ -49,6 +49,7 @@ gem 'therubyracer', :platform=>:ruby
 
 gem 'rabl-rails'
 gem 'yajl-ruby', require: 'yajl'
+gem 'faraday', '~> 0.9.0'
 
 group :development do
   gem 'better_errors'
