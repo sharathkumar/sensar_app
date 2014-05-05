@@ -22,7 +22,6 @@ SensarApp::Application.routes.draw do
         match '/forgot_password' => 'users/passwords#create', :via => :post
         match '/reset_password' => 'users/passwords#update', :via => :post
       end
-    # resources :beacons
       match '/beacon_details/(:beacon_id)' => 'beacons#show', :via => :get
     end
   end
