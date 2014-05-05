@@ -21,6 +21,7 @@ SensarApp::Application.routes.draw do
         match '/sign_up' => 'users/registrations#create', :via => :post
         match '/forgot_password' => 'users/passwords#create', :via => :post
         match '/reset_password' => 'users/passwords#update', :via => :post
+        match '/confirm_accout' => 'users/confirmations#show', :via => :get
       end
       match '/beacon_details/(:beacon_id)' => 'beacons#show', :via => :get
     end

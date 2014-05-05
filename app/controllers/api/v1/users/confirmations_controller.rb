@@ -1,4 +1,4 @@
-class Users::ConfirmationsController < Devise::ConfirmationsController
+class Api::V1::Users::ConfirmationsController < Devise::ConfirmationsController
 	skip_before_filter :verify_authenticity_token,
                      :if => Proc.new { |c| c.request.format == 'application/json' }
 	respond_to :json
