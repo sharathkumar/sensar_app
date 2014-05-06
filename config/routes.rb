@@ -17,11 +17,12 @@ SensarApp::Application.routes.draw do
     scope module: :v1, constraints: ApiConstraints.new(version: 1, default: :true) do
       devise_scope :user do
         match '/sign_in' => 'users/sessions#create', :via => :post
-        match '/sign_out' => 'users/sessions#destroy', :via => :delete
+        match '/sign_out' => 'users/sessions#destroy', :via => :post
         match '/sign_up' => 'users/registrations#create', :via => :post
         match '/forgot_password' => 'users/passwords#create', :via => :post
         match '/reset_password' => 'users/passwords#update', :via => :post
         match '/confirm_accout' => 'users/confirmations#show', :via => :get
+        match '/resent_confirmation' => 'users/confirmations#create', :via => :post
       end
       match '/beacon_details/(:beacon_id)' => 'beacons#show', :via => :get
     end

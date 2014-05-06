@@ -1,1 +1,1 @@
-CMS_HOST = 'http://www.json-generator.com'
+CMS_HOST = 'http://10.7.1.64:3000/'

@@ -3,36 +3,51 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
   respond_to :json
 
   def create
-    warden.authenticate!(:scope => resource_name, :recall => "#{controller_path}#failure")
-    render status: 200,
-           json:  { success: true,
-                    info: "Logged in",
-                    data: { auth_token: current_user.authentication_token } }
+    resource = User.find_for_database_authentication(:email => params[:user][:email])
+    return invalid_login_attempt unless resource
+    return is_confirmed_resource if resource.confirmed_at == nil
+    if resource.valid_password?(params[:user][:password])
+      sign_in(:user, resource)
+      resource.ensure_authentication_token
+      render json: {  status: "success", 
+                      errors: "", 
+                      data: { message: "Logged in",
+                              auth_token: resource.authentication_token, 
+                              email: resource.email } }
+      return
+    end
+    invalid_login_attempt
   end
 
   def destroy
-    warden.authenticate!(:scope => resource_name, :recall => "#{controller_path}#failure")
-    current_user.update_column(:authentication_token, nil)
-    sign_out(resource_name)
-    render status: 200,
-           json: {  success: true,
-                    info: "Logged out",
-                    data: {} }
+    resource = User.find_for_database_authentication(:email => params[:email])
+    resource.authentication_token = nil
+    resource.save
+    render :json=> {  status: "success",
+                      errors: "",
+                      data: { message: "Logged out" } }
   end
 
   protected
 
-  def ensure_params_exist
-    return unless params[:user].blank?
-    render  status: 422,  
-            json: { success: false, 
-                    info: "missing user login parameters" }
+  def invalid_login_attempt
+    render json: {  status: "failure", 
+                    errors: "",
+                    data: { message: "Invalid login or password" } }
   end
 
-  def failure
-    render status: 401,
-           json:  { success: false,
-                    info: "Login Failed",
-                    data: {} }
+  def ensure_params_exist
+    return unless params[:user].blank?
+    render json: {  status: "failure", 
+                    errors: "", 
+                    data: { message: "missing user login parameters" } }
   end
+
+  def is_confirmed_resource
+    render json: {  status: "failure", 
+                    errors: "", 
+                    data: { message: "You have to confirm your account before continuing.", 
+                            require_confirm: true } }
+  end
+
 end

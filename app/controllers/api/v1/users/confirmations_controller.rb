@@ -9,15 +9,28 @@ class Api::V1::Users::ConfirmationsController < Devise::ConfirmationsController
     yield resource if block_given?
 
     if resource.errors.empty?
-    	render status: 200,
-             json: {  success: true,
-                      info: "Your account was successfully confirmed., Please login.",
-                      data: {} }
+    	render json: {  status: "success",
+                      errors: "",
+                      data: { message: "Your account was successfully confirmed., Please login." } }
     else
-    	render status: 401,
-             json: {  success: false,
-                      info: resource.errors,
-                      data: {} }
+    	render json: {  status: "failure",
+                      errors: resource.format_errors,
+                      data: { message: "Confirmation failed."} }
+    end
+  end
+
+  def create
+    self.resource = resource_class.send_confirmation_instructions(resource_params)
+    yield resource if block_given?
+
+    if successfully_sent?(resource)
+      render json: {  status: "success",
+                      errors: "",
+                      data: { message: "You will receive an email with instructions about how to confirm your account in a few minutes." } }
+    else
+      render json: {  status: "failure",
+                      errors: resource.format_errors,
+                      data: { message: "Some errors occurred while processing." } }
     end
   end
   
