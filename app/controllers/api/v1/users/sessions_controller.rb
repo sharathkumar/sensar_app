@@ -13,7 +13,8 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
                       errors: "", 
                       data: { message: "Logged in",
                               auth_token: resource.authentication_token, 
-                              email: resource.email } }
+                              email: resource.email,
+                              require_confirm: false } }
       return
     end
     invalid_login_attempt
@@ -32,21 +33,23 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
 
   def invalid_login_attempt
     render json: {  status: "failure", 
-                    errors: "",
-                    data: { message: "Invalid login or password" } }
+                    errors: "Invalid login or password",
+                    data: { message: "Login failed",
+                            require_confirm: false } }
   end
 
   def ensure_params_exist
     return unless params[:user].blank?
     render json: {  status: "failure", 
-                    errors: "", 
-                    data: { message: "missing user login parameters" } }
+                    errors: "missing user login parameters", 
+                    data: { message: "Login failed",
+                            require_confirm: false } }
   end
 
   def is_confirmed_resource
     render json: {  status: "failure", 
-                    errors: "", 
-                    data: { message: "You have to confirm your account before continuing.", 
+                    errors: "You have to confirm your account before continuing.", 
+                    data: { message: "Login failed", 
                             require_confirm: true } }
   end
 
