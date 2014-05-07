@@ -3,7 +3,7 @@ class Api::V1::BeaconsController < ApplicationController
 	
 	def show
 		beacon_response = Beacon.new
-		render json: beacon_response.test
+		render json: beacon_response.details(params[:beacon_id])
 	end
 
 end
