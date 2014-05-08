@@ -5,7 +5,7 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
   def create
     resource = User.find_for_database_authentication(:email => params[:user][:email])
     return invalid_login_attempt unless resource
-    return is_confirmed_resource if resource.confirmed_at == nil
+    return is_confirmed_resource if resource.require_confirmation?
     if resource.valid_password?(params[:user][:password])
       sign_in(:user, resource)
       resource.ensure_authentication_token

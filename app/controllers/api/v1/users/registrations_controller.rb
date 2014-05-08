@@ -7,6 +7,7 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
 
 	def create
     build_resource(sign_up_params)
+    return confirm_account if resource.require_confirmation?
     if resource.save
       render json: {  status: "success", 
                       errors: "", 
@@ -21,6 +22,13 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
   end
 
   protected
+
+  def confirm_account
+    render json: {  status: "success", 
+                    errors: "", 
+                    data: { message: "Already Registered, Please confirm for login.",
+                            require_confirmation: true } }
+  end 
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:first_name, :last_name, :email, :password, :password_confirmation, :date_of_birth) }

@@ -13,9 +13,14 @@ class User < ActiveRecord::Base
 	end
 
 	def format_errors
-		errors.full_messages.join(" /n ")
+		errors.full_messages.join(" \n ")
 	end
-	 
+	
+	def require_confirmation?
+		user = User.find_by_email(email)
+		(user && confirmed_at == nil) ? true : false
+	end
+
 	private
 
 	def generate_authentication_token
