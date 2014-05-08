@@ -7,7 +7,7 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
 
 	def create
     build_resource(sign_up_params)
-    return confirm_account if resource.require_confirmation?
+    return confirmation_account if resource.require_confirmation?
     if resource.save
       render json: {  status: "success", 
                       errors: "", 
@@ -23,7 +23,7 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
 
   protected
 
-  def confirm_account
+  def confirmation_account
     render json: {  status: "success", 
                     errors: "", 
                     data: { message: "Already Registered, Please confirm for login.",

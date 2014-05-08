@@ -1,6 +1,9 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
+
+ 	UPDATE_ATTRS = ["password", "password_confirmation", "first_name", "last_name", "date_of_birth"]
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
@@ -18,7 +21,16 @@ class User < ActiveRecord::Base
 	
 	def require_confirmation?
 		user = User.find_by_email(email)
-		(user && confirmed_at == nil) ? true : false
+		if user && user.confirmed_at == nil
+			user.update_attributes(update_attrs)
+			return true
+		else
+			return false
+		end 
+	end
+
+	def update_attrs
+		UPDATE_ATTRS.each_with_object({}) {|attr, hash| hash[attr] = send(attr) }
 	end
 
 	private
