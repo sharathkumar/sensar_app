@@ -24,7 +24,7 @@ SensarApp::Application.routes.draw do
         match '/confirm_accout' => 'users/confirmations#show', :via => :get
         match '/resent_confirmation' => 'users/confirmations#create', :via => :post
       end
-      match '/beacon_details/(:beacon_id)' => 'beacons#show', :via => :post
+      match '/beacon_details' => 'beacons#show', :via => :post
     end
   end
 

@@ -22,11 +22,15 @@ class User < ActiveRecord::Base
 	def require_confirmation?
 		user = User.find_by_email(email)
 		if user && user.confirmed_at == nil
-			user.update_attributes(update_attrs)
+			user.update_me
 			return true
 		else
 			return false
 		end 
+	end
+
+	def update_me
+		update_attributes(update_attrs)
 	end
 
 	def update_attrs

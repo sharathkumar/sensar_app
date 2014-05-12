@@ -21,12 +21,19 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
   end
 
   def destroy
-    resource = User.find_for_database_authentication(:email => params[:email])
-    resource.authentication_token = nil
-    resource.save
-    render :json=> {  status: "success",
-                      errors: "",
-                      data: { message: "Logged out" } }
+    resource = User.find_for_database_authentication(:authentication_token => params[:auth_token])
+    if resource
+      resource.authentication_token = nil
+      resource.save
+      render :json=> {  status: "success",
+                        errors: "",
+                        data: { message: "Logged out" } }
+    else
+      render json: {  status: "failure", 
+                      errors: "You need to sign in before continue.",
+                      data: { message: "Logout failed" } }
+    end
+    
   end
 
   protected
@@ -47,7 +54,7 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
   end
 
   def is_confirmed_resource
-    render json: {  status: "failure", 
+    render json: {  status: "success", 
                     errors: "You have to confirm your account before continuing.", 
                     data: { message: "Login failed", 
                             require_confirm: true } }
