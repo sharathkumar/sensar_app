@@ -27,7 +27,7 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
     render json: {  status: "success", 
                     errors: "", 
                     data: { message: "Already Registered, Please confirm for login.",
-                            require_confirmation: true } }
+                            require_confirmation: "YES" } }
   end 
 
   def configure_permitted_parameters
