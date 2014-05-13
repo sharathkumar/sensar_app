@@ -11,7 +11,9 @@ class Api::V1::Users::ConfirmationsController < Devise::ConfirmationsController
     if resource.errors.empty?
     	render json: {  status: "success",
                       errors: "",
-                      data: { message: "Your account was successfully confirmed., Please login." } }
+                      data: { message: "Your account was successfully confirmed., Please login.",
+                              email: resource.email,
+                              auth_token: resource.authentication_token  } }
     else
     	render json: {  status: "failure",
                       errors: resource.format_errors,

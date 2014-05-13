@@ -12,8 +12,7 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
       render json: {  status: "success", 
                       errors: "", 
                       data: { message: "Registered, Please confirm for login.",
-                              email: resource.email,
-                              auth_token: resource.authentication_token } }
+                              email: resource.email } }
     else
       render json: {  status: "failure", 
                       errors: resource.format_errors, 
