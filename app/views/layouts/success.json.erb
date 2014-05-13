@@ -1,7 +1,0 @@
-<%=
-  raw({
-    status: response.status,
-    message: response.message,
-    data: Yajl::Parser.parse(yield)
-  }.to_json)
-%>

@@ -1,0 +1,15 @@
+<%=
+  raw(
+    if @errors.nil?
+      {
+        status: "success",
+        errors: "",
+        data: Yajl::Parser.parse(yield).merge!(message: @message)
+      }.to_json
+    else
+      {  status: "failure",
+          errors: "",
+          data: {message: @message} }.to_json
+    end
+  )
+%>

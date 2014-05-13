@@ -3,8 +3,8 @@ SensarApp::Application.routes.draw do
   # constraints subdomain: 'api' do
   #  scope module: 'api' do
   #    namespace :v1 do
-  #      devise_for :users, controllers: { registrations: 'api/v1/users/registrations', 
-  #                                  sessions: 'api/v1/users/sessions', 
+  #      devise_for :users, controllers: { registrations: 'api/v1/users/registrations',
+  #                                  sessions: 'api/v1/users/sessions',
   #                                  confirmations: 'users/confirmations',
   #                                  passwords: 'users/passwords' }
   #      resources :home
@@ -25,12 +25,13 @@ SensarApp::Application.routes.draw do
         match '/resent_confirmation' => 'users/confirmations#create', :via => :post
       end
       match '/beacon_details' => 'beacons#show', :via => :post
+      post '/create_social_profile' => 'social_profiles#create'
     end
   end
 
 
-  devise_for :users, controllers: { registrations: 'users/registrations', 
-                                    sessions: 'users/sessions', 
+  devise_for :users, controllers: { registrations: 'users/registrations',
+                                    sessions: 'users/sessions',
                                     confirmations: 'users/confirmations',
                                     passwords: 'users/passwords' }
   root to: "home#index"
