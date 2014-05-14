@@ -25,7 +25,14 @@ SensarApp::Application.routes.draw do
         match '/resent_confirmation' => 'users/confirmations#create', :via => :post
       end
       match '/beacon_details' => 'beacons#show', :via => :post
+
       post '/create_social_profile' => 'social_profiles#create'
+      post '/update_social_profile/:id' => 'social_profiles#update'
+      post '/delete_social_profile/:id' => 'social_profiles#delete'
+
+      post '/create_business_profile' => 'business_profiles#create'
+      post '/update_business_profile/:id' => 'business_profiles#update'
+      post '/delete_business_profile/:id' => 'business_profiles#delete'
     end
   end
 

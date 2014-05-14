@@ -8,7 +8,7 @@
       }.to_json
     else
       {  status: "failure",
-          errors: "",
+          errors: @errors,
           data: {message: @message} }.to_json
     end
   )

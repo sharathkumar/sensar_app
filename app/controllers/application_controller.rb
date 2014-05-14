@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
 	def authenticate_user_from_token!
 		user_token = params[:auth_token].presence
 		user = user_token && User.find_by_authentication_token(user_token.to_s)
-		 
+
 		if user
 			# Notice we are passing store false, so the user is not
 			# actually stored in the session and a token is needed
@@ -34,7 +34,7 @@ class ApplicationController < ActionController::Base
 	# def authenticate_user_from_token!
 	# 	user_email = params[:user_email].presence
 	# 	user = user_email && User.find_by_email(user_email)
-		 
+
 	# 	# Notice how we use Devise.secure_compare to compare the token
 	# 	# in the database with the token given in the params, mitigating
 	# 	# timing attacks.

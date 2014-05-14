@@ -11,3 +11,4 @@ class CreateSocialProfiles < ActiveRecord::Migration
     end
   end
 end
+	

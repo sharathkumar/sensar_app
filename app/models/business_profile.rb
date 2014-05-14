@@ -1,4 +1,4 @@
-class SocialProfile < ActiveRecord::Base
+class BusinessProfile < ActiveRecord::Base
   validates :user_id, presence: true
 
   def format_errors
