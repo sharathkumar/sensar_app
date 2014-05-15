@@ -1,4 +1,4 @@
-CMS_HOST = 'http://10.7.1.64:3000/'
+CMS_HOST = 'http://10.7.1.151:3000/'
 
 CMS_CONNECTION = Faraday.new(:url => CMS_HOST) do |faraday|
 										faraday.request  :url_encoded             # form-encode POST params
