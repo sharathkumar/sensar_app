@@ -35,6 +35,11 @@ module ProfileManagement
     end
   end
 
+  def show
+    @profile = @model_name.find(params[:id])
+    @message = ""
+  end
+
   def set_profile_model
     @model_name = controller_name.classify.constantize
   end

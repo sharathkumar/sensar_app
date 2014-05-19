@@ -29,10 +29,12 @@ SensarApp::Application.routes.draw do
       post '/create_social_profile' => 'social_profiles#create'
       post '/update_social_profile/:id' => 'social_profiles#update'
       post '/delete_social_profile/:id' => 'social_profiles#delete'
+      get '/view_social_profile/:id' => 'social_profiles#show'
 
       post '/create_business_profile' => 'business_profiles#create'
       post '/update_business_profile/:id' => 'business_profiles#update'
       post '/delete_business_profile/:id' => 'business_profiles#delete'
+      get '/view_business_profile/:id' => 'business_profiles#show'
     end
   end
 
