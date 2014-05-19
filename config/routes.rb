@@ -13,7 +13,8 @@ SensarApp::Application.routes.draw do
   #  end
   # end
 
-  namespace :api, defaults: {format: :json} do
+  # namespace :api, defaults: {format: :json} do
+  namespace :api do
     scope module: :v1, constraints: ApiConstraints.new(version: 1, default: :true) do
       devise_scope :user do
         match '/sign_in' => 'users/sessions#create', :via => :post
@@ -35,6 +36,8 @@ SensarApp::Application.routes.draw do
       post '/update_business_profile/:id' => 'business_profiles#update'
       post '/delete_business_profile/:id' => 'business_profiles#delete'
       get '/view_business_profile/:id' => 'business_profiles#show'
+
+      post 'picture_upload' => 'social_profiles#upload'
     end
   end
 

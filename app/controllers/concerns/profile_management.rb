@@ -40,8 +40,19 @@ module ProfileManagement
     @message = ""
   end
 
+  def upload
+  	@picture = Picture.new#(picture_params)
+  	@picture.decode_image(picture_params[:picture])
+  	@picture.save
+  	render text: @picture.picture.url(:preview)
+  end
+
   def set_profile_model
     @model_name = controller_name.classify.constantize
+  end
+
+  def picture_params
+  	params.require(:picture).permit(:picture )
   end
 
 end
